@@ -1,7 +1,10 @@
 package com.greenThumb.controller;
 
+import com.greenThumb.domain.User;
 import com.greenThumb.dto.FileDto;
+import com.greenThumb.dto.UserResponseDto;
 import com.greenThumb.dto.request.PostRequestDto;
+import com.greenThumb.dto.request.UserRequestDto;
 import com.greenThumb.dto.response.PostResponseDto;
 import com.greenThumb.service.FileService;
 import com.greenThumb.service.PostService;
@@ -19,6 +22,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
@@ -33,6 +37,7 @@ public class PostController {
 
     private final PostService postService;
     private final FileService fileService;
+    private final HttpSession session;
 
 //    @GetMapping("/postList")
 //    public String postList(Model model){
@@ -45,6 +50,13 @@ public class PostController {
      */
     @GetMapping("/questionList")
     public String questionList(Model model) {
+
+        UserResponseDto user = (UserResponseDto) session.getAttribute("user");
+
+        if (user!=null) {
+            model.addAttribute("user", user.getUsername());
+        }
+
         model.addAttribute("list", postService.findAll());
         return "questionList";
     }
@@ -54,6 +66,13 @@ public class PostController {
      */
     @GetMapping("/sharingList")
     public String sharingList(Model model) {
+
+        UserResponseDto user = (UserResponseDto) session.getAttribute("user");
+
+        if (user!=null) {
+            model.addAttribute("user", user.getUsername());
+        }
+
         model.addAttribute("list", postService.findAll());
         return "sharingList";
     }
@@ -78,12 +97,20 @@ public class PostController {
      * 객체가 자동으로 model 객체에 추가되고 뷰로 전달됨됨
      * */
     @GetMapping("/register")
-    public String register(@ModelAttribute PostRequestDto postRequestDto){  // 빈 오브젝트 만들어서 뷰에 전달
+    public String register(@ModelAttribute PostRequestDto postRequestDto, Model model){  // 빈 오브젝트 만들어서 뷰에 전달
+        UserResponseDto user = (UserResponseDto) session.getAttribute("user");
+
+        if (user!=null) {
+            model.addAttribute("user", user.getUsername());
+        }
+
         return "registerForm";
     }
 
     @PostMapping("/register")
     public String post(@RequestParam("file") MultipartFile files, @Valid PostRequestDto postRequestDto, BindingResult bindingResult) {
+
+        UserResponseDto user = (UserResponseDto) session.getAttribute("user");
 
         if (bindingResult.hasErrors()){
             log.info("errors = {}", bindingResult);
@@ -115,7 +142,7 @@ public class PostController {
             Long fileId = fileService.saveFile(fileDto);
             postRequestDto.setFileId(fileId);
 
-            postService.save(postRequestDto);
+            postService.save(user.getUsername(), postRequestDto);
 
         } catch (Exception e){
             e.printStackTrace();
@@ -138,6 +165,11 @@ public class PostController {
     @GetMapping("/post/{postId}/update")
     public String update(@PathVariable Long postId, Model model) {
 
+        UserResponseDto user = (UserResponseDto) session.getAttribute("user");
+
+        if (user!=null) {
+            model.addAttribute("user", user.getUsername());
+        }
 
         PostResponseDto response = postService.findById(postId);
 
@@ -156,16 +188,19 @@ public class PostController {
     @PostMapping("/post/{postId}/update")
     public String update(@PathVariable Long postId, @Valid @ModelAttribute PostRequestDto request, BindingResult bindingResult){
 
+        UserResponseDto user = (UserResponseDto) session.getAttribute("user");
+
         if (bindingResult.hasErrors()) {
             log.info("errors = {}", bindingResult);
             return "editForm";
         }
 
         PostResponseDto post = postService.findById(postId);
+
         if(post.getFileId()!=null){
             request.setFileId(post.getFileId());
         }
-        postService.update(postId, request);
+        postService.update(postId, user.getUsername(), request);
         return "redirect:/post/{postId}";
     }
 

@@ -1,6 +1,7 @@
 package com.greenThumb.dto.request;
 
 import com.greenThumb.domain.Post;
+import com.greenThumb.domain.User;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,7 @@ public class PostRequestDto {
 
     private Long fileId;
 
+    private User user;
 
     public Post toEntity() {
         return Post.builder()
@@ -31,6 +33,7 @@ public class PostRequestDto {
                 .content(content)
                 .category(category)
                 .fileId(fileId)
+                .user(user)
                 .build();
     }
 

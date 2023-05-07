@@ -1,26 +1,35 @@
 package com.greenThumb.controller;
 
+import com.greenThumb.dto.UserResponseDto;
 import com.greenThumb.dto.request.UserRequestDto;
 import com.greenThumb.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
 public class HomeController {
 
     private final UserService userService;
+    private final HttpSession session;
+
+
     @GetMapping("/")
-    public String home() {
+    public String home(Model model) {
+
+        UserResponseDto user = (UserResponseDto) session.getAttribute("user");
+
+        if (user!=null) {
+            model.addAttribute("user", user.getUsername());
+        }
         return "home";
     }
 
@@ -54,6 +63,8 @@ public class HomeController {
 //            }
             return "join";
         }
+
+        userService.checkUsernameDuplication(userRequestDto);
 
         userService.join(userRequestDto);
         return "redirect:/";

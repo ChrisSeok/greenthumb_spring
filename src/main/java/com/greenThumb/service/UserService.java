@@ -35,18 +35,16 @@ public class UserService {
     }
 
     /*
-    회원가입 시 유효성 체크
+    회원가입 시 아이디 중복 체크
      */
     @Transactional(readOnly = true)
-    public Map<String, String> validateHandling(Errors errors){
-        Map<String, String> validatorResult = new HashMap<>();
-
-        for (FieldError error : errors.getFieldErrors()) {
-            String validKeyName = String.format(("valid_%s"), error.getField());
-            validatorResult.put(validKeyName, error.getDefaultMessage());
+    public void checkUsernameDuplication(UserRequestDto dto){
+        boolean usernameDuplicate = userRepository.existsByUsername(dto.toEntity().getUsername());
+        if (usernameDuplicate) {
+            throw new IllegalStateException("이미 존재하는 아이디입니다");
         }
-        return validatorResult;
     }
+
 
 
 }

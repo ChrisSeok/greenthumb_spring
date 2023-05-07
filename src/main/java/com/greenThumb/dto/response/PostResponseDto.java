@@ -1,6 +1,7 @@
 package com.greenThumb.dto.response;
 
 import com.greenThumb.domain.Post;
+import com.greenThumb.domain.User;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -15,6 +16,7 @@ public class PostResponseDto {
     private String created;
     private String modified;
     private Long fileId;
+    private User user;
 
     public PostResponseDto(Post post) {
         this.id = post.getId();
@@ -24,5 +26,6 @@ public class PostResponseDto {
         this.created = post.getCreated();
         this.modified = post.getModified();
         this.fileId = post.getFileId();
+        this.user = post.getUser();
     }
 }

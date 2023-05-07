@@ -1,16 +1,21 @@
 package com.greenThumb.service;
 
 import com.greenThumb.domain.Post;
+import com.greenThumb.domain.User;
+import com.greenThumb.dto.UserResponseDto;
 import com.greenThumb.dto.request.PostRequestDto;
 import com.greenThumb.dto.response.PostResponseDto;
 import com.greenThumb.repository.PostRepository;
+import com.greenThumb.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -18,13 +23,17 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostService {
 
+    private final UserRepository userRepository;
     private final PostRepository postRepository;
 
     /**
      * 게시글 생성
      */
     @Transactional
-    public Long save(PostRequestDto requestDto) {
+    public Long save(String username, PostRequestDto requestDto) {
+
+        User user = userRepository.findByUsername(username).get();
+        requestDto.setUser(user);
         Post post = postRepository.save(requestDto.toEntity());
         return post.getId();
     }
@@ -52,12 +61,14 @@ public class PostService {
      * 게시글 수정
      */
     @Transactional
-    public Long update(Long id, PostRequestDto requestDto) {
+    public Long update(Long id, String username, PostRequestDto requestDto) {
 
         Post post = postRepository.findById(id).orElseThrow(
                 ()-> new IllegalArgumentException("해당 게시글이 없습니다. id="+id));
 
-        post.update(requestDto.getTitle(), requestDto.getContent(), post.getCategory(), requestDto.getFileId());
+        User user = userRepository.findByUsername(username).get();
+
+        post.update(requestDto.getTitle(), requestDto.getContent(), post.getCategory(), requestDto.getFileId(), user);
         return id;
     }
 
