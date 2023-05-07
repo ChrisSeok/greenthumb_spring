@@ -20,11 +20,10 @@
         <h2>게시글</h2>
     </div>
 
-    <button class="btn btn-dark pull-right"
-            onclick="location.href='board/postList.html'"
-            th:onclick="|location.href='@{/postList}'|"
-            type="button">목록으로
-    </button>
+    <div>
+        <button class="btn btn-dark pull-right" th:if="${post.category.toString().equals('질문게시판')}"  th:onclick="|location.href='@{/questionList}'|">목록으로</button>
+        <button class="btn btn-dark pull-right" th:if="${post.category.toString().equals('나눔게시판')}"  th:onclick="|location.href='@{/sharingList}'|">목록으로</button>
+    </div>
 
     <div>
         <label for="category">카테고리</label>
@@ -59,6 +58,16 @@
         <input type="text" id="registerDate" name="registerDate" class="form-control"
                value="작성자" th:value="${post.created}" readonly>
     </div>
+
+    <div th:if="${post.fileId != null}">
+        첨부파일 :
+        <a
+                th:class="card-text"
+                th:href="@{'/download/' + ${post.fileId}}"
+                th:text="${file.origFilename}"
+        ></a>
+    </div>
+
     <hr class="my-4">
 
     <button class="btn btn-primary"

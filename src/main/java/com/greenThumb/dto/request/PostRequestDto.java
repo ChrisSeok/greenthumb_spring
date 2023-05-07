@@ -1,4 +1,4 @@
-package com.greenThumb.request;
+package com.greenThumb.dto.request;
 
 import com.greenThumb.domain.Post;
 import lombok.AccessLevel;
@@ -22,12 +22,15 @@ public class PostRequestDto {
     @NotBlank
     private String category;
 
+    private Long fileId;
+
 
     public Post toEntity() {
         return Post.builder()
                 .title(title)
                 .content(content)
                 .category(category)
+                .fileId(fileId)
                 .build();
     }
 

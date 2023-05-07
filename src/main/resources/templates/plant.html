@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+<div id="wrapper">
+    <div class="container">
+        <div class="col-md-12">
+            <div style="margin-top: 50px;">
+
+            </div>
+                        <div class="py-5 text-center">
+                            <h2>식물 검색 페이지</h2>
+                        </div>
+            <button class="btn btn-dark"
+                    th:onclick="|location.href='@{/}'|" type="button">
+                홈 화면
+            </button>
+
+
+
+            <hr class="my-4">
+
+        </div>
+    </div>
+</div>
+
+</body>

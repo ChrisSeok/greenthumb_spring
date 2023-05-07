@@ -36,6 +36,28 @@
                       id="content" name="content"
                       th:value="*{content}" th:text="*{content}"></textarea>
         </div>
+
+        <div th:if="${postForm.fileId != null}">
+            첨부파일 :
+            <a
+                    th:class="card-text"
+                    th:href="@{'/download/' + ${postForm.fileId}}"
+                    th:text="${file.origFilename}"
+                    th:value="${file.origFilename}"
+            ></a>
+
+        </div>
+
+<!--        <div class="mb-3">-->
+<!--            <div class="col-sm-10">-->
+<!--                <div class="custom-file" id="inputFile">-->
+<!--                    <input name="file" type="file" class="custom-file-input" id="customFile" />-->
+<!--                    <label class="custom-file-label" for="customFile">파일을 선택해 주세요.</label>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+
         <hr class="my-4">
 
         <button class="btn btn-primary" type="submit">

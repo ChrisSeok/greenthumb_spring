@@ -1,4 +1,4 @@
-package com.greenThumb.response;
+package com.greenThumb.dto.response;
 
 import com.greenThumb.domain.Post;
 import lombok.Getter;
@@ -14,6 +14,7 @@ public class PostResponseDto {
     private String category;
     private String created;
     private String modified;
+    private Long fileId;
 
     public PostResponseDto(Post post) {
         this.id = post.getId();
@@ -22,5 +23,6 @@ public class PostResponseDto {
         this.category = post.getCategory();
         this.created = post.getCreated();
         this.modified = post.getModified();
+        this.fileId = post.getFileId();
     }
 }

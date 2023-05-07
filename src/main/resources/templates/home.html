@@ -18,12 +18,23 @@
 
         .container {
             /*background-color: yellow;*/
-            margin-top: 180px;
+            margin-top: 150px;
 
         }
     </style>
 </head>
 <body>
+
+<button class="btn btn-sm" style="background-color: #e9ecef; margin: 10px 0 0 10px;"
+        th:onclick="|location.href='@{/login}'|" type="button">
+    로그인
+</button>
+
+<button class="btn btn-sm" style="background-color: #e9ecef; margin:  10px 0 0 10px;"
+        th:onclick="|location.href='@{/join}'|" type="button">
+    회원가입
+</button>
+
 <div class="container" style="max-width: 600px">
     <div class="py-5 text-center">
         <p style="font-size: 4em">Green Thumb</p>
@@ -33,13 +44,13 @@
     <div class="row">
         <div class="col">
             <button class="w-100 btn btn-success btn-lg"
-                    th:onclick="|location.href='@{/login}'|" type="button">
+                    th:onclick="|location.href='@{/plant}'|" type="button">
                 식물 검색
             </button>
         </div>
         <div class="col">
             <button class="w-100 btn btn-success btn-lg"
-                    th:onclick="|location.href='@{/postList}'|" type="button">
+                    th:onclick="|location.href='@{/questionList}'|" type="button">
                 커뮤니티
             </button>
         </div>

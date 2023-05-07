@@ -1,4 +1,4 @@
-package com.greenThumb.response;
+package com.greenThumb.dto.response;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

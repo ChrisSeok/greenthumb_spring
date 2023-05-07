@@ -22,17 +22,21 @@ public class Post extends BaseTimeEntity {
     private String content;
     private String category;
 
+    private Long fileId;
+
     @Builder
-    public Post(String title, String content, String category) {
+    public Post(String title, String content, String category, Long fileId) {
         this.title = title;
         this.content = content;
         this.category = category;
+        this.fileId = fileId;
     }
 
     // 비즈니스 메서드 //
-    public void update(String title, String content, String category) {
+    public void update(String title, String content, String category, Long fileId) {
         this.title = title;
         this.content = content;
         this.category = category;
+        this.fileId = fileId;
     }
 }

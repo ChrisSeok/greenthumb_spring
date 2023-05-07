@@ -1,9 +1,9 @@
 package com.greenThumb.service;
 
 import com.greenThumb.domain.Post;
+import com.greenThumb.dto.request.PostRequestDto;
+import com.greenThumb.dto.response.PostResponseDto;
 import com.greenThumb.repository.PostRepository;
-import com.greenThumb.request.PostRequestDto;
-import com.greenThumb.response.PostResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -57,7 +57,7 @@ public class PostService {
         Post post = postRepository.findById(id).orElseThrow(
                 ()-> new IllegalArgumentException("해당 게시글이 없습니다. id="+id));
 
-        post.update(requestDto.getTitle(), requestDto.getContent(), post.getCategory());
+        post.update(requestDto.getTitle(), requestDto.getContent(), post.getCategory(), requestDto.getFileId());
         return id;
     }
 

@@ -1,16 +1,30 @@
 package com.greenThumb.controller;
 
-import com.greenThumb.request.PostRequestDto;
-import com.greenThumb.response.PostResponseDto;
+import com.greenThumb.dto.FileDto;
+import com.greenThumb.dto.request.PostRequestDto;
+import com.greenThumb.dto.response.PostResponseDto;
+import com.greenThumb.service.FileService;
 import com.greenThumb.service.PostService;
+import com.greenThumb.util.MD5Generator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Slf4j
 @Controller
@@ -18,12 +32,13 @@ import javax.validation.Valid;
 public class PostController {
 
     private final PostService postService;
+    private final FileService fileService;
 
-    @GetMapping("/postList")
-    public String postList(Model model){
-        model.addAttribute("list", postService.findAll());
-        return "postList";
-    }
+//    @GetMapping("/postList")
+//    public String postList(Model model){
+//        model.addAttribute("list", postService.findAll());
+//        return "postList";
+//    }
 
     /*
     질문 게시판
@@ -46,6 +61,11 @@ public class PostController {
     @GetMapping("/post/{postId}")
     public String postView(@PathVariable Long postId, Model model){
         PostResponseDto response = postService.findById(postId);
+
+        if(response.getFileId()!=null){
+            FileDto fileDto = fileService.getFile(response.getFileId());
+            model.addAttribute("file", fileDto);
+        }
         model.addAttribute("post", response);
         return "post";
     }
@@ -63,15 +83,52 @@ public class PostController {
     }
 
     @PostMapping("/register")
-    public String post(@Valid PostRequestDto postRequestDto, BindingResult bindingResult) {
+    public String post(@RequestParam("file") MultipartFile files, @Valid PostRequestDto postRequestDto, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()){
             log.info("errors = {}", bindingResult);
             return "registerForm";
         }
 
-        postService.save(postRequestDto);
-        return "redirect:/postList";
+        try {
+            String origFilename = files.getOriginalFilename();
+            String filename = new MD5Generator(origFilename).toString();
+            /* 실행되는 위치의 'files' 폴더에 파일이 저장됩니다. */
+            String savePath = System.getProperty("user.dir") + "\\files";
+            /* 파일이 저장되는 폴더가 없으면 폴더를 생성합니다. */
+            if (!new File(savePath).exists()) {
+                try {
+                    new File(savePath).mkdir();
+                } catch (Exception e) {
+                    e.getStackTrace();
+                }
+            }
+
+            String filePath = savePath + "\\" + filename;
+            files.transferTo(new File(filePath));
+
+            FileDto fileDto = new FileDto();
+            fileDto.setOrigFilename(origFilename);
+            fileDto.setFilename(filename);
+            fileDto.setFilePath(filePath);
+
+            Long fileId = fileService.saveFile(fileDto);
+            postRequestDto.setFileId(fileId);
+
+            postService.save(postRequestDto);
+
+        } catch (Exception e){
+            e.printStackTrace();
+
+        }
+
+        if(postRequestDto.getCategory().equals("질문게시판")){
+            return "redirect:/questionList";
+        }
+
+        else{
+            return "redirect:/sharingList";
+        }
 
     }
 
@@ -81,7 +138,14 @@ public class PostController {
     @GetMapping("/post/{postId}/update")
     public String update(@PathVariable Long postId, Model model) {
 
+
         PostResponseDto response = postService.findById(postId);
+
+        if(response.getFileId()!=null){
+            FileDto fileDto = fileService.getFile(response.getFileId());
+            model.addAttribute("file", fileDto);
+        }
+
         model.addAttribute("postForm", response);
         model.addAttribute("postId", postId);
 
@@ -97,6 +161,10 @@ public class PostController {
             return "editForm";
         }
 
+        PostResponseDto post = postService.findById(postId);
+        if(post.getFileId()!=null){
+            request.setFileId(post.getFileId());
+        }
         postService.update(postId, request);
         return "redirect:/post/{postId}";
     }
@@ -107,10 +175,32 @@ public class PostController {
      */
     @GetMapping("/post/{postId}/delete")
     public String delete(@PathVariable Long postId) {
-        postService.deleteById(postId);
-        return "redirect:/postList";
+
+        PostResponseDto post = postService.findById(postId);
+        String category = post.getCategory();
+
+        if(category.equals("질문게시판")){
+            postService.deleteById(postId);
+            return "redirect:/questionList";
+        }
+
+        else{
+            postService.deleteById(postId);
+            return "redirect:/sharingList";
+        }
     }
-    
+
+
+    @GetMapping("/download/{fileId}")
+    public ResponseEntity<Resource> fileDownload(@PathVariable("fileId") Long fileId) throws IOException {
+        FileDto fileDto = fileService.getFile(fileId);
+        Path path = Paths.get(fileDto.getFilePath());
+        Resource resource = new InputStreamResource(Files.newInputStream(path));
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType("application/octet-stream"))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDto.getOrigFilename() + "\"")
+                .body(resource);
+    }
 
 }
 
