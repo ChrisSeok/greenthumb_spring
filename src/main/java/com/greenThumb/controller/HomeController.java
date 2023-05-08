@@ -33,6 +33,18 @@ public class HomeController {
         return "home";
     }
 
+    @GetMapping("/place")
+    public String place(Model model) {
+
+        UserResponseDto user = (UserResponseDto) session.getAttribute("user");
+
+        if (user!=null) {
+            model.addAttribute("user", user.getUsername());
+        }
+        return "place";
+    }
+
+
     @GetMapping("/login")
     public String login(){
         return "login";
@@ -69,4 +81,6 @@ public class HomeController {
         userService.join(userRequestDto);
         return "redirect:/";
     }
+
+
 }

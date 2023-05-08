@@ -15,9 +15,11 @@
 </head>
 <body>
 
-<span class="mx-3" th:text="|${user}님 안녕하세요|"></span>
-<a href="/" class="btn btn-outline-dark">Home</a>
-<a href="/logout" class="btn btn-outline-dark">로그아웃</a>
+<div style="margin-top: 10px">
+    <span class="mx-3" th:text="|${user}님 안녕하세요!|"></span>
+    <a href="/" class="btn btn-outline-dark btn-sm">Home</a>
+    <a href="/logout" class="btn btn-outline-dark btn-sm">로그아웃</a>
+</div>
 
 <div id="wrapper">
     <div class="container">

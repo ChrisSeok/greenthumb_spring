@@ -12,7 +12,7 @@
             font-family: 'Ubuntu', sans-serif;
         }
 
-        button {
+        * {
             font-family: 'Noto Sans KR', sans-serif;
         }
 
@@ -36,14 +36,14 @@
 <!--</button>-->
 
 
-<div th:if="${user}">
-    <span class="mx-3" th:text="|${user}님 안녕하세요|"></span>
-    <a href="/logout" class="btn btn-outline-dark">로그아웃</a>
+<div th:if="${user}" style="margin-top: 10px">
+    <span class="mx-3" th:text="|${user}님 안녕하세요!|"></span>
+    <a href="/logout" class="btn btn-outline-dark btn-sm">로그아웃</a>
 </div>
 
-<div th:if="!${user}">
-    <a href="/login" class="btn btn-outline-dark">로그인</a>
-    <a href="/join" class="btn btn-outline-dark">회원가입</a>
+<div th:if="!${user}" style="margin-top: 10px">
+    <a href="/login" class="btn btn-outline-dark btn-sm" style="margin-left: 10px">로그인</a>
+    <a href="/join" class="btn btn-outline-dark btn-sm" style="margin-left: 4px">회원가입</a>
 </div>
 
 
@@ -70,7 +70,7 @@
         </div>
         <div class="col">
             <button class="w-100 btn btn-success btn-lg"
-                    th:onclick="|location.href='@{/login}'|" type="button">
+                    th:onclick="|location.href='@{/place}'|" type="button">
                 장소 추천
             </button>
         </div>

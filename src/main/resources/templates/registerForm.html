@@ -4,11 +4,20 @@
     <meta charset="utf-8">
     <link th:href="@{/css/bootstrap.min.css}"
           href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+
     <style>
         .field-error {
             border-color: #dc3545;
             color: #dc3545;
         }
+
+        * {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
     </style>
 </head>
 <body>
@@ -18,7 +27,7 @@
     </div>
     <form th:action th:object="${postRequestDto}" method="post" enctype="multipart/form-data">
         <div>
-            <select th:field="*{category}" class="form-select">
+            <select style="width: 400px" th:field="*{category}" class="form-select">
                 <option value="">카테고리를 선택해주세요</option> <!--선택안한 비어있는값-->
                 <option value="질문게시판">질문 게시판</option>
                 <option value="나눔게시판">나눔 게시판</option>
@@ -61,11 +70,11 @@
 
         <hr class="my-4">
 
-        <button class="btn btn-success btn-lg" type="submit">
+        <button class="btn btn-success" type="submit">
             작성
         </button>
-        <button class="btn btn-secondary btn-lg"
-                th:onclick="|location.href='@{/postList}'|"
+        <button class="btn btn-secondary"
+                th:onclick="|location.href='@{/}'|"
                 type="button">
             취소
         </button>

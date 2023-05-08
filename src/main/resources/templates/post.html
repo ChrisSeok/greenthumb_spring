@@ -4,55 +4,68 @@
     <meta charset="utf-8">
     <link th:href="@{/css/bootstrap.min.css}"
           href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Ubuntu:wght@500&display=swap" rel="stylesheet">
     <style>
-        .container{
-            max-width: 700px;
-        }
+        /*.container{*/
+        /*    max-width: 700px;*/
+        /*}*/
+
         .field-error {
             border-color: #dc3545;
             color: #dc3545;
         }
+
+        * {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
     </style>
 </head>
 <body>
+
+<div style="margin-top: 10px">
+    <span class="mx-3" th:text="|${user}님 안녕하세요!|"></span>
+    <a href="/" class="btn btn-outline-dark btn-sm">Home</a>
+    <a href="/logout" class="btn btn-outline-dark btn-sm">로그아웃</a>
+</div>
+
 <div class="container">
+
     <div class="py-5 text-center">
         <h2>게시글</h2>
     </div>
 
-    <div>
-        <button class="btn btn-dark pull-right" th:if="${post.category.toString().equals('질문게시판')}"  th:onclick="|location.href='@{/questionList}'|">목록으로</button>
-        <button class="btn btn-dark pull-right" th:if="${post.category.toString().equals('나눔게시판')}"  th:onclick="|location.href='@{/sharingList}'|">목록으로</button>
-    </div>
+
 
     <div>
         <label for="category">카테고리</label>
-        <input type="text" id="category" name="category" class="form-control"
+        <input style="width: 300px" type="text" id="category" name="category" class="form-control"
                value="1" th:value="${post.category}" readonly>
     </div>
 
-<!--    <div>-->
-<!--        <label for="postId">글번호</label>-->
-<!--        <input type="text" id="postId" name="postId" class="form-control"-->
-<!--               value="1" th:value="${post.id}" readonly>-->
-<!--    </div>-->
+    <div>
+        <label for="writer">작성자</label>
+        <input style="width: 300px" type="text" id="writer" name="writer" class="form-control"
+               value="작성자" th:value="${post.user.username}" readonly>
+    </div>
 
     <div>
         <label for="postTitle">제목</label>
         <input type="text" id="postTitle" name="postTitle" class="form-control"
                value="제목" th:value="${post.title}" readonly>
     </div>
+
+
+
     <div>
         <label for="postContent">내용</label>
         <textarea class="form-control" rows="5"
                   id="postContent" name="postContent"
                   th:value="${post.content}" th:text="${post.content}" readonly></textarea>
     </div>
-    <div>
-        <label for="writer">작성자</label>
-        <input type="text" id="writer" name="writer" class="form-control"
-               value="작성자" th:value="${post.user.username}" readonly>
-    </div>
+
     <div>
         <label for="registerDate">작성일</label>
         <input type="text" id="registerDate" name="registerDate" class="form-control"
@@ -70,13 +83,16 @@
 
     <hr class="my-4">
 
-    <button class="btn btn-primary"
+    <button class="btn btn-success"
             th:onclick="|location.href='@{/post/{postId}/update(postId=${post.id})}'|"
             type="button">수정</button>
 
-    <button class="btn btn-danger"
+    <button class="btn btn-outline-dark"
             th:onclick="|location.href='@{/post/{postId}/delete(postId=${post.id})}'|"
             type="button">삭제</button>
+
+    <button class="btn btn-dark pull-right" th:if="${post.category.toString().equals('질문게시판')}"  th:onclick="|location.href='@{/questionList}'|">목록으로</button>
+    <button class="btn btn-dark pull-right" th:if="${post.category.toString().equals('나눔게시판')}"  th:onclick="|location.href='@{/sharingList}'|">목록으로</button>
 
 
 </div> <!-- /container -->
