@@ -5,6 +5,8 @@ import com.greenThumb.domain.User;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 public class PostResponseDto {
@@ -17,6 +19,7 @@ public class PostResponseDto {
     private String modified;
     private Long fileId;
     private User user;
+    private List<CommentResponseDto> comments;
 
     public PostResponseDto(Post post) {
         this.id = post.getId();
@@ -27,5 +30,6 @@ public class PostResponseDto {
         this.modified = post.getModified();
         this.fileId = post.getFileId();
         this.user = post.getUser();
+        this.comments = post.getComments().stream().map(CommentResponseDto::new).collect(Collectors.toList());
     }
 }

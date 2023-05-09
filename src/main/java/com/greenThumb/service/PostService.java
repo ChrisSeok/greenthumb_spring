@@ -2,7 +2,6 @@ package com.greenThumb.service;
 
 import com.greenThumb.domain.Post;
 import com.greenThumb.domain.User;
-import com.greenThumb.dto.UserResponseDto;
 import com.greenThumb.dto.request.PostRequestDto;
 import com.greenThumb.dto.response.PostResponseDto;
 import com.greenThumb.repository.PostRepository;
@@ -12,10 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service

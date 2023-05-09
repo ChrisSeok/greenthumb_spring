@@ -1,7 +1,6 @@
 package com.greenThumb.controller;
 
-import com.greenThumb.dto.UserResponseDto;
-import lombok.Getter;
+import com.greenThumb.dto.response.UserResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

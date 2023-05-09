@@ -81,20 +81,81 @@
         ></a>
     </div>
 
-    <hr class="my-4">
 
-    <button class="btn btn-success"
+    <div class="d-flex justify-content-center">
+
+        <button class="btn btn-success"
             th:onclick="|location.href='@{/post/{postId}/update(postId=${post.id})}'|"
             type="button">수정</button>
+        <div style="width: 6px"></div>
 
-    <button class="btn btn-outline-dark"
+
+        <button class="btn btn-outline-dark"
             th:onclick="|location.href='@{/post/{postId}/delete(postId=${post.id})}'|"
             type="button">삭제</button>
 
-    <button class="btn btn-dark pull-right" th:if="${post.category.toString().equals('질문게시판')}"  th:onclick="|location.href='@{/questionList}'|">목록으로</button>
-    <button class="btn btn-dark pull-right" th:if="${post.category.toString().equals('나눔게시판')}"  th:onclick="|location.href='@{/sharingList}'|">목록으로</button>
+        <div style="width: 6px"></div>
+
+        <button class="btn btn-outline-dark" th:if="${post.category.toString().equals('질문게시판')}"  th:onclick="|location.href='@{/questionList}'|">목록으로</button>
+        <button class="btn btn-outline-dark" th:if="${post.category.toString().equals('나눔게시판')}"  th:onclick="|location.href='@{/sharingList}'|">목록으로</button>
+
+    </div>
+
+    <hr class="my-4">
 
 
+    <form class="input-group mb-3" id="reply" th:action='@{/comment/create/{postId}(postId=${post.id})}' method="post">
+        <input type="text" id="comment" name="comment" class="form-control" placeholder="댓글을 입력해주세요.." aria-label="댓글을 입력해주세요.." aria-describedby="basic-addon2">
+        <input type="hidden" id="postId" name="postId" th:value="${post.id}">
+        <button class="btn btn-outline-secondary" type="submit">등록</button>
+    </form>
+
+
+<!--        <div class="input-group mb-3">-->
+<!--            <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">-->
+<!--            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>-->
+<!--        </div>-->
+
+    <div th:if="${comments != null}">
+        <tr th:each="c : ${comments}">
+            <td>
+<!--                <div class="card">-->
+<!--                    <h5 class="card-header" th:text="${c.username}">Featured</h5>-->
+<!--                    <div class="card-body">-->
+<!--&lt;!&ndash;                        <h5 class="card-title">Special title treatment</h5>&ndash;&gt;-->
+<!--                        <p class="card-text" th:text="${c.comment}">With supporting text below as a natural lead-in to additional content.</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+                <div class="card">
+                    <div class="card-header" th:text="${c.username}">
+                        Quote
+                    </div>
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <p class="card-text" th:text="${c.comment}">With supporting text below as a natural lead-in to additional content.</p>
+                            <footer class="blockquote-footer" th:text="${c.created}">Someone famous in </footer>
+                        </blockquote>
+                    </div>
+                </div>
+
+
+                <div style="height: 6px"></div>
+
+            </td>
+
+    </div>
+
+
+
+
+
+<!--    <div th:if="${comments != null}">-->
+<!--        <tr th:each="c : ${comments}">-->
+<!--            <td th:text="${c.id}"></td>-->
+<!--            <td th:text="${c.comment}"></td>-->
+<!--            <td th:text="${c.username}"></td>-->
+<!--    </div>-->
 </div> <!-- /container -->
 
 </body>

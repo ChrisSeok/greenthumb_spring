@@ -1,6 +1,6 @@
 package com.greenThumb.controller;
 
-import com.greenThumb.dto.UserResponseDto;
+import com.greenThumb.dto.response.UserResponseDto;
 import com.greenThumb.dto.request.UserRequestDto;
 import com.greenThumb.service.UserService;
 import lombok.RequiredArgsConstructor;

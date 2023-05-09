@@ -1,11 +1,13 @@
 package com.greenThumb.controller;
 
-import com.greenThumb.domain.User;
+import com.greenThumb.domain.Comment;
 import com.greenThumb.dto.FileDto;
-import com.greenThumb.dto.UserResponseDto;
+import com.greenThumb.dto.request.CommentRequestDto;
+import com.greenThumb.dto.response.CommentResponseDto;
+import com.greenThumb.dto.response.UserResponseDto;
 import com.greenThumb.dto.request.PostRequestDto;
-import com.greenThumb.dto.request.UserRequestDto;
 import com.greenThumb.dto.response.PostResponseDto;
+import com.greenThumb.service.CommentService;
 import com.greenThumb.service.FileService;
 import com.greenThumb.service.PostService;
 import com.greenThumb.util.MD5Generator;
@@ -29,6 +31,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -37,6 +40,8 @@ public class PostController {
 
     private final PostService postService;
     private final FileService fileService;
+    private final CommentService commentService;
+
     private final HttpSession session;
 
 //    @GetMapping("/postList")
@@ -79,12 +84,29 @@ public class PostController {
 
     @GetMapping("/post/{postId}")
     public String postView(@PathVariable Long postId, Model model){
+
         PostResponseDto response = postService.findById(postId);
+        List<CommentResponseDto> comments = response.getComments();
+
+        if (comments != null && !comments.isEmpty()) {
+            model.addAttribute("comments", comments);
+        }
+
+        UserResponseDto user = (UserResponseDto) session.getAttribute("user");
+
+        if (user!=null) {
+            model.addAttribute("user", user.getUsername());
+
+//            if (response.getUser().getId().equals(user.getId())) {
+//                model.addAttribute("writer", true);
+//            }
+        }
 
         if(response.getFileId()!=null){
             FileDto fileDto = fileService.getFile(response.getFileId());
             model.addAttribute("file", fileDto);
         }
+
         model.addAttribute("post", response);
         return "post";
     }
@@ -235,6 +257,18 @@ public class PostController {
                 .contentType(MediaType.parseMediaType("application/octet-stream"))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDto.getOrigFilename() + "\"")
                 .body(resource);
+    }
+
+
+    @PostMapping("/comment/create/{postId}")
+    public String commentSave(@PathVariable Long postId, CommentRequestDto dto) {
+
+
+        UserResponseDto user = (UserResponseDto) session.getAttribute("user");
+        commentService.commentSave(user.getUsername(), postId, dto);
+
+        return "redirect:/post/{postId}";
+
     }
 
 }

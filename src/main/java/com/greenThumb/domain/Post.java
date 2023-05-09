@@ -2,8 +2,10 @@ package com.greenThumb.domain;
 
 import jdk.jfr.Category;
 import lombok.*;
+import org.springframework.core.annotation.Order;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -24,6 +26,9 @@ public class Post extends BaseTimeEntity {
     @JoinColumn(name="user_id")
     private User user;
 
+    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OrderBy("id asc") // 댓글 정렬
+    private List<Comment> comments;
 
 
     private Long fileId;

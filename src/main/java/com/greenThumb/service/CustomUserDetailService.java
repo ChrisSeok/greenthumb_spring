@@ -2,7 +2,7 @@ package com.greenThumb.service;
 
 import com.greenThumb.CustomUserDetails;
 import com.greenThumb.domain.User;
-import com.greenThumb.dto.UserResponseDto;
+import com.greenThumb.dto.response.UserResponseDto;
 import com.greenThumb.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
