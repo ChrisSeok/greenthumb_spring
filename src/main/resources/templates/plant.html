@@ -11,6 +11,37 @@
         * {
             font-family: 'Noto Sans KR', sans-serif;
         }
+
+        .filebox .upload-name {
+            display: inline-block;
+            height: 40px;
+            padding: 0 10px;
+            vertical-align: middle;
+            border: 1px solid #dddddd;
+            width: 58%;
+            color: #999999;
+        }
+
+        .filebox label {
+            display: inline-block;
+            padding: 10px 20px;
+            color: white;
+            vertical-align: middle;
+            background-color: #198754;
+            cursor: pointer;
+            height: 40px;
+            margin-left: 10px;
+        }
+
+        .filebox input[type="file"] {
+            position: absolute;
+            width: 0;
+            height: 0;
+            padding: 0;
+            overflow: hidden;
+            border: 0;
+        }
+
     </style>
 </head>
 <body>
@@ -26,14 +57,36 @@
 
 
         <div class="col-md-12">
-            <div style="margin-top: 50px;">
+            <div style="margin-top: 170px;">
 
             </div>
-                        <div class="py-5 text-center">
-                            <h2>식물 검색 페이지</h2>
-                        </div>
+            <div class="py-5 text-center">
+                <h3 style="font-weight: bold">궁금한 식물 사진을 올려주세요!</h3>
 
-            <hr class="my-4">
+                <br>
+                <br>
+                <div class="filebox">
+                    <input class="upload-name" value="첨부파일" placeholder="첨부파일">
+                    <label for="file">파일찾기</label>
+                    <input type="file" id="file">
+                </div>
+
+            </div>
+
+<!--            <hr class="my-4">-->
+
+<!--            <div class="py-5 text-center">-->
+<!--                <form>-->
+<!--                    <div class="custom-file">-->
+<!--                        <input type="file" class="custom-file-input" id="customFile">-->
+<!--                        <label class="custom-file-label" for="customFile"></label>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+
+
+
+
 
         </div>
     </div>
