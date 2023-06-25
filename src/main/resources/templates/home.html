@@ -7,14 +7,28 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300&family=Tinos:wght@700&display=swap" rel="stylesheet">
+
     <style>
-        p {
-            font-family: 'Ubuntu', sans-serif;
-        }
 
         * {
-            font-family: 'Noto Sans KR', sans-serif;
+            font-family: 'Tinos', serif;
+
+            /*font-family: 'Noto Sans', sans-serif;*/
+            /*font-family: 'Noto Sans KR', sans-serif;*/
         }
+
+        p {
+            font-family: 'Tinos', serif;
+            /*font-family: 'Ubuntu', sans-serif;*/
+        }
+
 
         .container {
             /*background-color: yellow;*/
@@ -22,65 +36,76 @@
 
         }
 
+
         body {
-            background-color: #F8FBEF;
+            background: url(/img/back.png) no-repeat center fixed;
+            background-size: cover;
+            /*background-color: #F8FBEF;*/
+        }
+
+        .delbtn {
+            padding: 12px;
+            /*padding-left: 55px;*/
+            /*padding-right: 55px;*/
+            border-radius: 2em;
+            background-color: transparent;
+            border: none;
         }
     </style>
 </head>
 <body>
 
-<!--<button class="btn btn-sm" style="background-color: #e9ecef; margin: 10px 0 0 10px;"-->
-<!--        th:onclick="|location.href='@{/login}'|" type="button">-->
-<!--    로그인-->
-<!--</button>-->
-
-<!--<button class="btn btn-sm" style="background-color: #e9ecef; margin:  10px 0 0 10px;"-->
-<!--        th:onclick="|location.href='@{/join}'|" type="button">-->
-<!--    회원가입-->
-<!--</button>-->
 
 
-<div th:if="${user}" style="margin-top: 10px">
-    <span class="mx-3" th:text="|${user}님 안녕하세요!|"></span>
-    <a href="/logout" class="btn btn-outline-dark btn-sm">로그아웃</a>
-</div>
+    <div th:if="${user}" style="margin-top: 10px">
+        <span class="mx-3" th:text="|${user}님 안녕하세요!|"></span>
+        <a href="/logout" class="btn btn-outline-dark btn-sm">로그아웃</a>
+    </div>
 
-<div th:if="!${user}" style="margin-top: 10px">
-    <a href="/login" class="btn btn-outline-dark btn-sm" style="margin-left: 10px">로그인</a>
-    <a href="/join" class="btn btn-outline-dark btn-sm" style="margin-left: 4px">회원가입</a>
-</div>
+    <div th:if="!${user}" style="margin-top: 10px">
+        <a href="/login" class="btn btn-outline-dark btn-sm" style="margin-left: 10px;  border: none">Sign In</a>
+        <a href="/join" class="btn btn-outline-dark btn-sm" style="margin-left: 4px;  border: none">Sign Up</a>
 
+    </div>
+    <div>
 
-
+    </div>
 
 <div class="container" style="max-width: 600px">
-    <div class="py-5 text-center">
-        <p style="font-size: 4em">Green Thumb</p>
+
+<!--    <hr style="height:3px;border:none;background-color:black;">-->
+
+    <div class="py-3 text-center">
+        <p style="font-size: 5em">Green Thumb</p>
     </div>
+
+    <hr style="border:none; border-top: 5px double black">
 
 
     <div class="row">
         <div class="col">
-            <button class="w-100 btn btn-success btn-lg"
+            <button class="w-100 btn btn-lg" style="font-size: 1.5em"
                     th:onclick="|location.href='@{/plant}'|" type="button">
-                식물 검색
+                search
             </button>
         </div>
         <div class="col">
-            <button class="w-100 btn btn-success btn-lg"
+            <button class="w-100 btn btn-lg" style="font-size: 1.5em"
                     th:onclick="|location.href='@{/questionList}'|" type="button">
-                커뮤니티
+                community
             </button>
         </div>
         <div class="col">
-            <button class="w-100 btn btn-success btn-lg"
+            <button class="w-100 btn btn-lg" style="font-size: 1.5em"
                     th:onclick="|location.href='@{/place}'|" type="button">
-                장소 추천
+                places
             </button>
         </div>
     </div>
 <!--    <hr class="my-4">-->
+    <hr style="border:none; border-top: 5px double black">
 
 </div> <!-- /container -->
+
 </body>
 </html>
