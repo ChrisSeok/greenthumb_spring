@@ -16,9 +16,11 @@
 </head>
 <body>
 <div class="container">
-    <div class="py-5 text-center">
-        <h2>게시글 수정</h2>
-    </div>
+    <div style="margin-top: 130px;"></div>
+
+    <!--    <div class="py-5 text-center">-->
+<!--        <h2>게시글 수정</h2>-->
+<!--    </div>-->
     <form th:action th:object="${postForm}" method="post">
         <div>
             <label for="category">카테고리</label>
@@ -54,19 +56,10 @@
 
         </div>
 
-<!--        <div class="mb-3">-->
-<!--            <div class="col-sm-10">-->
-<!--                <div class="custom-file" id="inputFile">-->
-<!--                    <input name="file" type="file" class="custom-file-input" id="customFile" />-->
-<!--                    <label class="custom-file-label" for="customFile">파일을 선택해 주세요.</label>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-
 
         <hr class="my-4">
 
-        <button class="btn btn-primary" type="submit">
+        <button class="btn btn-success" type="submit">
             수정 완료
         </button>
 

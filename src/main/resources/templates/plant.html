@@ -46,10 +46,11 @@
 </head>
 <body>
 
+
 <div style="margin-top: 10px">
-    <span class="mx-3" th:text="|${user}님 안녕하세요!|"></span>
-    <a href="/" class="btn btn-outline-dark btn-sm">Home</a>
-    <a href="/logout" class="btn btn-outline-dark btn-sm">로그아웃</a>
+    <a href="/" class="btn btn-outline-dark btn-sm" style="margin-left:10px; border: none; text-decoration: underline">Home</a>
+    <a href="/logout" class="btn btn-outline-dark btn-sm" style="border: none; text-decoration: underline">Sign Out</a>
+    <a href="/logout" class="btn btn-outline-dark btn-sm" th:text="|${user}'s page|" style="border: none; text-decoration: underline">Sign Out</a>
 </div>
 
 <div id="wrapper">

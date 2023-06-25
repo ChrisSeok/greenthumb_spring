@@ -17,18 +17,17 @@
 
     <style>
 
+
+
+
         * {
-            font-family: 'Tinos', serif;
-
-            /*font-family: 'Noto Sans', sans-serif;*/
-            /*font-family: 'Noto Sans KR', sans-serif;*/
+            font-family: 'Tinos', 'Noto Sans KR', sans-serif;
         }
 
-        p {
-            font-family: 'Tinos', serif;
-            /*font-family: 'Ubuntu', sans-serif;*/
-        }
+        .info {
+            font-family: 'Noto Sans KR', sans-serif;
 
+        }
 
         .container {
             /*background-color: yellow;*/
@@ -57,14 +56,14 @@
 
 
 
-    <div th:if="${user}" style="margin-top: 10px">
-        <span class="mx-3" th:text="|${user}님 안녕하세요!|"></span>
-        <a href="/logout" class="btn btn-outline-dark btn-sm">로그아웃</a>
+    <div th:if="${user}" style="margin-top: 10px" class="info">
+        <span class="mx-3" th:text="|${user}'s page|" style="text-decoration: underline"></span>
+        <a href="/logout" class="btn btn-outline-dark btn-sm" style="border: none; text-decoration: underline">Sign Out</a>
     </div>
 
     <div th:if="!${user}" style="margin-top: 10px">
-        <a href="/login" class="btn btn-outline-dark btn-sm" style="margin-left: 10px;  border: none">Sign In</a>
-        <a href="/join" class="btn btn-outline-dark btn-sm" style="margin-left: 4px;  border: none">Sign Up</a>
+        <a href="/login" class="btn btn-outline-dark btn-sm" style="margin-left: 10px;  border: none; text-decoration: underline">Sign In</a>
+        <a href="/join" class="btn btn-outline-dark btn-sm" style="margin-left: 4px;  border: none; text-decoration: underline">Sign Up</a>
 
     </div>
     <div>
@@ -82,7 +81,7 @@
     <hr style="border:none; border-top: 5px double black">
 
 
-    <div class="row">
+    <div class="row" style="margin-top: -10px; margin-bottom: -10px" >
         <div class="col">
             <button class="w-100 btn btn-lg" style="font-size: 1.5em"
                     th:onclick="|location.href='@{/plant}'|" type="button">

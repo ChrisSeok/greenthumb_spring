@@ -16,9 +16,9 @@
 <body>
 
 <div style="margin-top: 10px">
-    <span class="mx-3" th:text="|${user}님 안녕하세요!|"></span>
-    <a href="/" class="btn btn-outline-dark btn-sm">Home</a>
-    <a href="/logout" class="btn btn-outline-dark btn-sm">로그아웃</a>
+    <a href="/" class="btn btn-outline-dark btn-sm" style="margin-left:10px; border: none; text-decoration: underline">Home</a>
+    <a href="/logout" class="btn btn-outline-dark btn-sm" style="border: none; text-decoration: underline">Sign Out</a>
+    <a href="/logout" class="btn btn-outline-dark btn-sm" th:text="|${user}'s page|" style="border: none; text-decoration: underline">Sign Out</a>
 </div>
 
 <div id="wrapper">
@@ -33,12 +33,12 @@
 
 
 
-            <div style="margin-top: 50px;">
+            <div style="margin-top: 100px;">
 
             </div>
-            <div class="py-5 text-center">
-                <h2 style="font-weight: bold">질문 게시판</h2>
-            </div>
+<!--            <div class="py-5 text-center">-->
+<!--                <h2 style="font-weight: bold">질문 게시판</h2>-->
+<!--            </div>-->
 
 
             <div style="display: inline-block; margin: 0 5px; float: right;">
@@ -49,15 +49,26 @@
             </div>
 
 
-            <button class="btn btn-success"
-                    th:onclick="|location.href='@{/questionList}'|" type="button">
-                질문 게시판
-            </button>
+            <div class="d-flex justify-content-start buttons">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="btn-group">
 
-            <button class="btn" style="background-color: #e9ecef"
-                    th:onclick="|location.href='@{/sharingList}'|" type="button">
-                나눔 게시판
-            </button>
+                            <button class="btn btn-success"
+                                    th:onclick="|location.href='@{/questionList}'|" type="button">
+                                질문 게시판
+                            </button>
+
+                            <button class="btn" style="background-color: #e9ecef"
+                                    th:onclick="|location.href='@{/sharingList}'|" type="button">
+                                나눔 게시판
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
 
 

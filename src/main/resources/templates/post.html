@@ -51,27 +51,17 @@
 </head>
 <body>
 
+
 <div style="margin-top: 10px">
-    <span class="mx-3" th:text="|${user}님 안녕하세요!|"></span>
-    <a href="/" class="btn btn-outline-dark btn-sm">Home</a>
-    <a href="/logout" class="btn btn-outline-dark btn-sm">로그아웃</a>
+    <a href="/" class="btn btn-outline-dark btn-sm" style="margin-left:10px; border: none; text-decoration: underline">Home</a>
+    <a href="/logout" class="btn btn-outline-dark btn-sm" style="border: none; text-decoration: underline">Sign Out</a>
+    <a href="/logout" class="btn btn-outline-dark btn-sm" th:text="|${user}'s page|" style="border: none; text-decoration: underline">Sign Out</a>
 </div>
 
 <div class="container">
 
-<!--    <div class="py-5 text-center">-->
-<!--        <h2>게시글</h2>-->
-<!--    </div>-->
 
-
-
-<!--    <div>-->
-<!--        <label for="category">카테고리</label>-->
-<!--        <input style="width: 300px" type="text" id="category" name="category" class="form-control"-->
-<!--               value="1" th:value="${post.category}" readonly>-->
-<!--    </div>-->
-
-    <div style="margin-top: 170px;"></div>
+    <div style="margin-top: 130px;"></div>
 
 
     <div class="d-flex justify-content-between">
@@ -90,24 +80,20 @@
             </div>
         </div>
 
-        <!--    "d-flex justify-content-center"-->
+
         <div class="d-flex justify-content-end buttons">
+            <div class="row">
+                <div class="col-12">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-success" th:onclick="|location.href='@{/post/{postId}/update(postId=${post.id})}'|">수정</button>
+                        <button type="button" class="btn btn-outline-dark" th:onclick="|location.href='@{/post/{postId}/delete(postId=${post.id})}'|">삭제</button>
 
-            <button class="btn btn-success"
-                    th:onclick="|location.href='@{/post/{postId}/update(postId=${post.id})}'|"
-                    type="button">수정</button>
-            <div style="width: 6px"></div>
+                        <button class="btn btn-outline-dark" th:if="${post.category.toString().equals('질문게시판')}"  th:onclick="|location.href='@{/questionList}'|">목록으로</button>
+                        <button class="btn btn-outline-dark" th:if="${post.category.toString().equals('나눔게시판')}"  th:onclick="|location.href='@{/sharingList}'|">목록으로</button>
 
-
-            <button class="btn btn-outline-dark"
-                    th:onclick="|location.href='@{/post/{postId}/delete(postId=${post.id})}'|"
-                    type="button">삭제</button>
-
-            <div style="width: 6px"></div>
-
-            <button class="btn btn-outline-dark" th:if="${post.category.toString().equals('질문게시판')}"  th:onclick="|location.href='@{/questionList}'|">목록으로</button>
-            <button class="btn btn-outline-dark" th:if="${post.category.toString().equals('나눔게시판')}"  th:onclick="|location.href='@{/sharingList}'|">목록으로</button>
-
+                    </div>
+                </div>
+            </div>
         </div>
 
 
@@ -117,19 +103,6 @@
     <hr class="my-4">
 
 
-
-
-    <!--    <div>-->
-<!--        <label for="writer">작성자</label>-->
-<!--        <input style="width: 300px" type="text" id="writer" name="writer" class="form-control"-->
-<!--               value="작성자" th:value="${post.user.username}" readonly>-->
-<!--    </div>-->
-
-<!--    <div>-->
-<!--        <label for="postTitle">제목</label>-->
-<!--        <input type="text" id="postTitle" name="postTitle" class="form-control"-->
-<!--               value="제목" th:value="${post.title}" readonly>-->
-<!--    </div>-->
 
     <div>
 <!--        <label for="postTitle">제목</label>-->
@@ -159,6 +132,9 @@
 <!--    </div>-->
 
 
+    <div th:if="${post.fileId != null}">
+        <img th:src="@{'/download/' + ${post.fileId}}" width="500px" height="auto" onError="this.style.visibility='hidden'">
+    </div>
 
     <hr class="my-4">
 
