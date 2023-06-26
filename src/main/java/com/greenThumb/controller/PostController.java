@@ -1,12 +1,12 @@
 package com.greenThumb.controller;
 
-import com.greenThumb.domain.Comment;
+import com.greenThumb.domain.Post;
 import com.greenThumb.dto.FileDto;
 import com.greenThumb.dto.request.CommentRequestDto;
-import com.greenThumb.dto.response.CommentResponseDto;
-import com.greenThumb.dto.response.UserResponseDto;
 import com.greenThumb.dto.request.PostRequestDto;
+import com.greenThumb.dto.response.CommentResponseDto;
 import com.greenThumb.dto.response.PostResponseDto;
+import com.greenThumb.dto.response.UserResponseDto;
 import com.greenThumb.service.CommentService;
 import com.greenThumb.service.FileService;
 import com.greenThumb.service.PostService;
@@ -44,11 +44,6 @@ public class PostController {
 
     private final HttpSession session;
 
-//    @GetMapping("/postList")
-//    public String postList(Model model){
-//        model.addAttribute("list", postService.findAll());
-//        return "postList";
-//    }
 
     /*
     질문 게시판
@@ -271,5 +266,18 @@ public class PostController {
 
     }
 
+    @GetMapping("/post/search")
+    public String search(String keyword, Model model) {
+        List<Post> searchList = postService.search(keyword);
+        model.addAttribute("searchList", searchList);
+
+        UserResponseDto user = (UserResponseDto) session.getAttribute("user");
+
+        if (user!=null) {
+            model.addAttribute("user", user.getUsername());
+        }
+
+        return "post-search";
+    }
 }
 

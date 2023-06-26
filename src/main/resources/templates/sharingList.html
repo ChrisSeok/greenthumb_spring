@@ -31,36 +31,38 @@
             <div style="margin-top: 100px;">
             </div>
 
-<!--            <div class="py-5 text-center">-->
-<!--                <h2 style="font-weight: bold">나눔 게시판</h2>-->
-<!--            </div>-->
 
 
-            <div style="display: inline-block; margin: 0 5px; float: right;">
-                <button class="btn btn-success"
-                        th:onclick="|location.href='@{/register}'|" type="button" >
-                    글쓰기
-                </button>
-            </div>
+            <div style="padding-bottom: 40px">
 
+                <div class="btn-group" style="float: left">
 
-            <div class="d-flex justify-content-start buttons">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="btn-group">
+                    <button class="btn" style="background-color: #e9ecef"
+                            th:onclick="|location.href='@{/questionList}'|" type="button">
+                        질문 게시판
+                    </button>
 
-                            <button class="btn" style="background-color: #e9ecef"
-                                    th:onclick="|location.href='@{/questionList}'|" type="button">
-                                질문 게시판
-                            </button>
+                    <button class="btn btn-success"
+                            th:onclick="|location.href='@{/sharingList}'|" type="button">
+                        나눔 게시판
+                    </button>
 
-                            <button class="btn btn-success"
-                                    th:onclick="|location.href='@{/sharingList}'|" type="button">
-                                나눔 게시판
-                            </button>
+                </div>
 
+                <div style="float: right">
+                    <button class="btn btn-success"
+                            th:onclick="|location.href='@{/register}'|" type="button" >
+                        글쓰기
+                    </button>
+                </div>
+
+                <div style="float: right; margin-right: 4px">
+                    <form action="/post/search" method="GET" class="input-group">
+                        <input type="text" class="form-control" name="keyword" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit">검색</button>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
 

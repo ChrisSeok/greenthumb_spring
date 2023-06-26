@@ -77,4 +77,12 @@ public class PostService {
         postRepository.deleteById(id);
     }
 
+    /**
+     * 게시글 검색
+     */
+    @Transactional
+    public List<Post> search(String keyword){
+        List<Post> postList = postRepository.findByTitleContaining(keyword);
+        return postList;
+    }
 }

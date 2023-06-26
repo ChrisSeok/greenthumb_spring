@@ -27,43 +27,39 @@
 
             <div style="margin-top: 100px;">
             </div>
-<!--            <div class="py-5 text-center">-->
-<!--                <h2 style="font-weight: bold">질문 게시판</h2>-->
-<!--            </div>-->
 
             <div style="padding-bottom: 40px">
 
-                    <div class="btn-group" style="float: left">
+                <div class="btn-group" style="float: left">
 
-                        <button class="btn btn-success"
-                                th:onclick="|location.href='@{/questionList}'|" type="button">
-                            질문 게시판
-                        </button>
+                    <button class="btn" style="background-color: #e9ecef"
+                            th:onclick="|location.href='@{/questionList}'|" type="button">
+                        질문 게시판
+                    </button>
 
-                        <button class="btn" style="background-color: #e9ecef"
-                                th:onclick="|location.href='@{/sharingList}'|" type="button">
-                            나눔 게시판
-                        </button>
+                    <button class="btn" style="background-color: #e9ecef"
+                            th:onclick="|location.href='@{/sharingList}'|" type="button">
+                        나눔 게시판
+                    </button>
 
-                    </div>
+                </div>
 
-                    <div style="float: right">
-                        <button class="btn btn-success"
-                                th:onclick="|location.href='@{/register}'|" type="button" >
-                            글쓰기
-                        </button>
-                    </div>
+                <div style="float: right">
+                    <button class="btn btn-success"
+                            th:onclick="|location.href='@{/register}'|" type="button" >
+                        글쓰기
+                    </button>
+                </div>
 
-                    <div style="float: right; margin-right: 4px">
-                        <form action="/post/search" method="GET" class="input-group">
-                            <input type="text" class="form-control" name="keyword" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="submit">검색</button>
-                            </div>
-                        </form>
-                    </div>
+                <div style="float: right; margin-right: 4px">
+                    <form action="/post/search" method="GET" class="input-group">
+                        <input type="text" class="form-control" name="keyword" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit">검색</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-
 
 
             <hr class="my-4">
@@ -72,19 +68,19 @@
                 <thead>
                 <tr>
                     <th width="20%">카테고리</th>
-<!--                    <th width="10%">글번호</th>-->
+                    <!--                    <th width="10%">글번호</th>-->
                     <th width="">제목</th>
                     <th width="20%">작성자</th>
                     <th width="20%">작성일</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="post : ${list}" th:if="${post.category.toString().equals('질문게시판')}">
+                <tr th:each="post : ${searchList}">
                     <td th:text="${post.category}">카테고리</td>
-<!--                    <td>-->
-<!--                        <a th:href="@{/post/{postId}(postId=${post.id})}"-->
-<!--                           th:text="${post.id}">글번호</a>-->
-<!--                    </td>-->
+                    <!--                    <td>-->
+                    <!--                        <a th:href="@{/post/{postId}(postId=${post.id})}"-->
+                    <!--                           th:text="${post.id}">글번호</a>-->
+                    <!--                    </td>-->
                     <td>
                         <a th:href="@{/post/{postId}(postId=${post.id})}"
                            th:text="${post.title}">제목</a>
