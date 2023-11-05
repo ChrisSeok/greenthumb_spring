@@ -31,13 +31,13 @@
 
         .container {
             /*background-color: yellow;*/
-            margin-top: 150px;
+            margin-top: 50px;
 
         }
 
 
         body {
-            background: url(/img/back.png) no-repeat center fixed;
+            background: url(/img/back3.png) no-repeat center fixed;
             background-size: cover;
             /*background-color: #F8FBEF;*/
         }
@@ -56,55 +56,67 @@
 
 
 
-    <div th:if="${user}" style="margin-top: 10px" class="info">
-        <span class="mx-3" th:text="|${user}'s page|" style="text-decoration: underline"></span>
-        <a href="/logout" class="btn btn-outline-dark btn-sm" style="border: none; text-decoration: underline">Sign Out</a>
-    </div>
 
-    <div th:if="!${user}" style="margin-top: 10px">
-        <a href="/login" class="btn btn-outline-dark btn-sm" style="margin-left: 10px;  border: none; text-decoration: underline">Sign In</a>
-        <a href="/join" class="btn btn-outline-dark btn-sm" style="margin-left: 4px;  border: none; text-decoration: underline">Sign Up</a>
+<!--style="max-width: 1200px; margin-left: 330px"-->
 
-    </div>
-    <div>
+<div class="container" >
 
-    </div>
 
-<div class="container" style="max-width: 600px">
+    <ul class="nav justify-content-end" style="margin-top: -30px">
+        <li class="nav-item">
+            <a class="nav-link" style="color: black; font-weight: bold; font-size: 1.1em" href="/plant">식물 검색</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" style="color: black; font-weight: bold; font-size: 1.1em" href="/questionList">커뮤니티</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" style="color: black; font-weight: bold; font-size: 1.1em" href="/place">장소 추천</a>
+        </li>
+
+        <li class="nav-item">
+        </li>
+
+        <li class="nav-item" th:if="${user}">
+            <a class="nav-link" style="color: black;  font-size: 0.8em; margin-top: 5px" href="/logout">로그아웃</a>
+        </li>
+
+        <li class="nav-item" th:if="!${user}">
+            <a class="nav-link" style="color: black;  font-size: 0.8em; margin-top: 5px" href="/login">로그인/ 회원가입</a>
+        </li>
+    </ul>
+
+</div>
+
+
+<!--<div th:if="${user}" style="margin-top: 10px" class="info">-->
+<!--    <span class="mx-3" th:text="|${user}'s page|" style="text-decoration: underline"></span>-->
+<!--    <a href="/logout" class="btn btn-outline-dark btn-sm" style="border: none; text-decoration: underline">Sign Out</a>-->
+<!--</div>-->
+
+<!--<div th:if="!${user}" style="margin-top: 10px">-->
+<!--    <a href="/login" class="btn btn-outline-dark btn-sm" style="margin-left: 10px;  border: none; text-decoration: underline">Sign In</a>-->
+<!--    <a href="/join" class="btn btn-outline-dark btn-sm" style="margin-left: 4px;  border: none; text-decoration: underline">Sign Up</a>-->
+
+<!--</div>-->
 
 <!--    <hr style="height:3px;border:none;background-color:black;">-->
 
-    <div class="py-3 text-center">
+<!--    <div class="py-3 text-center">-->
+<div class="py-3" style="margin-left: 100px; margin-top: 150px">
         <p style="font-size: 5em">Green Thumb</p>
-    </div>
+</div>
 
-    <hr style="border:none; border-top: 5px double black">
+<div class="py-3" style="margin-left: 100px; margin-top: -40px">
+
+    <p style="font-size: 1.3em">    사용자가 업로드 한 사진을 기반으로 식물 종을 판별하고, 가드닝 방법을 제공하며 <br>
+        사용자 커뮤니티 · 근처 꽃집 등을 알려주는 부가기능을 갖춘 통합 AI 홈 가드닝 서비스
+    </p>
+
+</div>
 
 
-    <div class="row" style="margin-top: -10px; margin-bottom: -10px" >
-        <div class="col">
-            <button class="w-100 btn btn-lg" style="font-size: 1.5em"
-                    th:onclick="|location.href='@{/plant}'|" type="button">
-                search
-            </button>
-        </div>
-        <div class="col">
-            <button class="w-100 btn btn-lg" style="font-size: 1.5em"
-                    th:onclick="|location.href='@{/questionList}'|" type="button">
-                community
-            </button>
-        </div>
-        <div class="col">
-            <button class="w-100 btn btn-lg" style="font-size: 1.5em"
-                    th:onclick="|location.href='@{/place}'|" type="button">
-                places
-            </button>
-        </div>
-    </div>
-<!--    <hr class="my-4">-->
-    <hr style="border:none; border-top: 5px double black">
 
-</div> <!-- /container -->
 
 </body>
 </html>

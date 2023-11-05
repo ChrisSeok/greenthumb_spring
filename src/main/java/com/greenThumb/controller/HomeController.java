@@ -79,7 +79,7 @@ public class HomeController {
         userService.checkUsernameDuplication(userRequestDto);
 
         userService.join(userRequestDto);
-        return "redirect:/";
+        return "redirect:/login";
     }
 
 

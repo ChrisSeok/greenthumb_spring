@@ -7,10 +7,25 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300&family=Tinos:wght@700&display=swap" rel="stylesheet">
+
     <style>
-        /*.container{*/
-        /*    max-width: 700px;*/
-        /*}*/
+
+        * {
+            font-family: 'Tinos', 'Noto Sans KR', sans-serif;
+        }
+
+        body {
+            background: url(/img/ano.png) no-repeat center fixed;
+            background-size: cover;
+            /*background-color: #F8FBEF;*/
+        }
 
         .field-error {
             border-color: #dc3545;
@@ -43,25 +58,31 @@
             align-items: flex-end;
         }
 
-        * {
-            font-family: 'Noto Sans KR', sans-serif;
-        }
 
     </style>
 </head>
 <body>
 
+<div class="py-3" style="margin-left: -1300px; margin-top: -10px">
 
-<div style="margin-top: 10px">
-    <a href="/" class="btn btn-outline-dark btn-sm" style="margin-left:10px; border: none; text-decoration: underline">Home</a>
-    <a href="/logout" class="btn btn-outline-dark btn-sm" style="border: none; text-decoration: underline">Sign Out</a>
-    <a href="/logout" class="btn btn-outline-dark btn-sm" th:text="|${user}'s page|" style="border: none; text-decoration: underline">Sign Out</a>
+    <button class="w-100 btn btn-lg" style="font-size: 2em;"
+            th:onclick="|location.href='@{/}'|" type="button">
+        Green Thumb
+    </button>
+
+    <!--    <a href="/" style="font-size: 2em; border: none;">Green Thumb</a>-->
+
 </div>
+<!--<div style="margin-top: 10px">-->
+<!--    <a href="/" class="btn btn-outline-dark btn-sm" style="margin-left:10px; border: none; text-decoration: underline">Home</a>-->
+<!--    <a href="/logout" class="btn btn-outline-dark btn-sm" style="border: none; text-decoration: underline">Sign Out</a>-->
+<!--    <a href="/logout" class="btn btn-outline-dark btn-sm" th:text="|${user}'s page|" style="border: none; text-decoration: underline">Sign Out</a>-->
+<!--</div>-->
 
 <div class="container">
 
 
-    <div style="margin-top: 130px;"></div>
+    <div style="margin-top: 70px;"></div>
 
 
     <div class="d-flex justify-content-between">

@@ -22,48 +22,55 @@
             font-family: 'Tinos', 'Noto Sans KR', sans-serif;
         }
 
+        body {
+            background: url(/img/join.png) no-repeat center fixed;
+            background-size: cover;
+            /*background-color: #F8FBEF;*/
+        }
+
     </style>
 </head>
 
 <body>
 
+<div style="margin-left: 600px">
 
-<div class="py-5 text-center" style="margin-top:150px;">
-    <h1>Sign Up</h1>
-</div>
-
-
-<div class="d-flex justify-content-center">
-    <form th:action="@{/join}" method="post" th:object="${userRequestDto}" >
+    <div class="py-5 text-center" style="margin-top:150px;">
+        <h2>Sign Up</h2>
+    </div>
 
 
-        <div>
-<!--            <label for="username">ID</label>-->
-            <input style="width: 500px" type="text" id="username" th:field="*{username}" class="form-control"
-                   placeholder="아이디를 입력하세요" th:errorclass="field-error">
-            <div class="field-error" th:errors="*{username}" />
-        </div>
-
-        <div style="margin-top: 20px;"></div>
-
-        <div>
-<!--            <label for="password">비밀번호</label>-->
-            <input style="width: 500px" type="password" id="password" th:field="*{password}" class="form-control"
-                   placeholder="비밀번호를 입력하세요" th:errorclass="field-error">
-            <div class="field-error" th:errors="*{password}" />
-        </div>
+    <div class="d-flex justify-content-center">
+        <form th:action="@{/join}" method="post" th:object="${userRequestDto}" >
 
 
-        <div style="margin-top: 50px;"></div>
+            <div>
+    <!--            <label for="username">ID</label>-->
+                <input style="width: 500px" type="text" id="username" th:field="*{username}" class="form-control"
+                       placeholder="아이디를 입력하세요" th:errorclass="field-error">
+                <div class="field-error" th:errors="*{username}" />
+            </div>
 
-        <div class="d-flex justify-content-center">
-            <button type="submit" class="btn btn-success">회원가입</button>
-            <div style="width: 6px"></div>
-            <a href="/" class="btn btn-outline-dark">이전으로</a>
-        </div>
+            <div style="margin-top: 20px;"></div>
 
-    </form>
-</div>
+            <div>
+    <!--            <label for="password">비밀번호</label>-->
+                <input style="width: 500px" type="password" id="password" th:field="*{password}" class="form-control"
+                       placeholder="비밀번호를 입력하세요" th:errorclass="field-error">
+                <div class="field-error" th:errors="*{password}" />
+            </div>
+
+
+            <div style="margin-top: 50px;"></div>
+
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-success">회원가입</button>
+                <div style="width: 6px"></div>
+                <a href="/" class="btn btn-outline-dark">홈으로</a>
+            </div>
+
+        </form>
+    </div>
 </div>
 </body>
 </html>

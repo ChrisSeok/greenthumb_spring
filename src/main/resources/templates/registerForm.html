@@ -7,6 +7,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300&family=Tinos:wght@700&display=swap" rel="stylesheet">
 
     <style>
         .field-error {
@@ -15,13 +22,32 @@
         }
 
         * {
-            font-family: 'Noto Sans KR', sans-serif;
+            font-family: 'Tinos', 'Noto Sans KR', sans-serif;
         }
+
+        body {
+            background: url(/img/ano.png) no-repeat center fixed;
+            background-size: cover;
+            /*background-color: #F8FBEF;*/
+        }
+
 
     </style>
 </head>
 <body>
-<div class="container">
+
+<div class="py-3" style="margin-left: -1300px; margin-top: -10px">
+
+    <button class="w-100 btn btn-lg" style="font-size: 2em;"
+            th:onclick="|location.href='@{/}'|" type="button">
+        Green Thumb
+    </button>
+
+    <!--    <a href="/" style="font-size: 2em; border: none;">Green Thumb</a>-->
+
+</div>
+
+<div class="container" style="margin-top: -50px">
     <div class="py-5 text-center">
 <!--        <h2>게시글 등록</h2>-->
     </div>
